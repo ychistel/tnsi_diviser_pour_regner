@@ -1,0 +1,668 @@
+\documentclass[11pt,a4paper]{article}
+
+%-------------------------------------
+%            Informations Générales
+%-------------------------------------
+
+%\NeedsTeXFormat{LaTeX2e}[2009/09/24]
+%\ProvidesPackage{style}[2009/09/24 Extension personnelle, V1.0]
+
+%-------------------------------------
+% 						extensions
+%-------------------------------------
+\usepackage[T1]{fontenc} 
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage{url}
+%\usepackage{etex}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{bbm}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage[official]{eurosym}
+%\usepackage{pifont}
+\usepackage[left=1cm, right=1cm, top=1cm, bottom=1.5cm]{geometry}
+\usepackage{exercise}
+\usepackage{graphics}
+\usepackage{array,multirow,makecell}
+\usepackage{verbatim}
+\usepackage[dvipsnames,table]{pstricks}
+\usepackage{pstricks-add,pst-plot,pst-text,pst-tree,pst-eps,pst-fill,pst-node,pst-math,pst-blur,pst-func}
+\usepackage{pgf,tikz}
+\usepackage{tipfr}
+\usepackage{thmbox}
+\usepackage{calc}
+\usepackage{ifthen}
+\usepackage{pdfpages}
+\usepackage{colortbl}
+%\usepackage{sagetex}
+\usetikzlibrary{arrows,patterns}
+%\input tabvar
+\usepackage{tkz-tab}
+\usepackage{listings}
+\usepackage[np]{numprint}
+%\usepackage{tabularx}
+\usepackage{fancybox,fancyhdr}
+\usepackage{thmtools}
+\usepackage{bclogo}
+\usepackage{lastpage}
+\usepackage{tcolorbox}
+
+%------------------------------------- 
+%        		Abréviations personnelles
+%-------------------------------------
+\newcommand{\Cc}{\textbf{Conclusion:}}
+\newcommand{\DNS}{\textbf{Devoir Non Surveillé}}
+\newcommand{\DS}{\textbf{Devoir Surveillé}}
+\newcommand\fpsd{une fonction polynôme du second degré~}
+\newcommand{\N}{\mathbb{N} } % Raccourci pour l'ensemble des entiers naturels
+\newcommand{\R}{\mathbb{R}} % Raccourci pour l'ensemble des réels
+\newcommand{\Z}{\mathbb{Z}} % Raccourci pour l'ensemble des entiers relatifs
+%\newcommand{\N}{\mathbb{N}} % Raccourci pour l'ensemble des réels
+
+%----------------------------------------------------------------------------------------------- 
+% 							Commandes mathématiques
+%-----------------------------------------------------------------------------------------------
+\renewcommand{\vec}[1]{\overrightarrow{#1}}	% Raccourci pour vecteurs
+\newcommand{\inv}[1]{\dfrac{1}{#1}} % Raccourci pour l'inverse des réels
+\newcommand{\e}{\text{e}}
+\newcommand*{\E}{\ensuremath{\mathrm{e}}}
+\newcommand{\lnx}{\ln(x)}
+
+%----------------------------------------------------------------------------------------------- 
+% 							Commandes Tableaux
+%-----------------------------------------------------------------------------------------------
+\setcellgapes{3pt}
+\makegapedcells{}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}b{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}b{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}b{#1}}
+
+%----------------------------------------------------------------------------------------------- 
+% 							Commandes Listes
+%-----------------------------------------------------------------------------------------------
+% Redéfinition du premier niveau
+\renewcommand{\theenumi}{\arabic{enumi})}
+\renewcommand{\labelenumi}{\textbf{\theenumi}}
+% Redéfinition du deuxième niveau
+\renewcommand{\theenumii}{\alph{enumii}}
+\renewcommand{\labelenumii}{\textbf{\theenumii )}}
+
+%\renewcommand{\theitemi}{$\bullet$}
+
+%-----------------------------------------------------------------------------------------------
+%							 		Environnement - Macros
+%-----------------------------------------------------------------------------------------------
+\setlength{\columnsep}{20pt}
+\setlength{\columnseprule}{0.5pt}
+\renewcommand{\thesection}{\arabic{section}}
+%\renewcommand{\thesection}{\arabic{section}}
+%La numérotation des section repart à 0 lorsque l'on change de partie
+%\makeatletter\@addtoreset{section}{chapter}\makeatother
+\makeatletter\@addtoreset{subsection}{section}\makeatother
+%\renewcommand{\thechapter}{\arabic{chapter}}
+%\renewcommand{\thesection}{\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{subsection}}
+%Modifier la section dans son positionnement, sa forme, couleur,...
+%\makeatletter
+%\renewcommand\section{\@startsection {section}{1}{\z@}%
+%                                   {-1.5ex \@plus -0.5ex \@minus -.2ex}%
+ %                                  {1.8ex \@plus .2ex}%
+  %                                 {\raggedleft\normalfont\color{gray}\large\bfseries}}
+%\makeatother
+\newenvironment{maliste}%
+{ \begin{list}%
+	{$\bullet$}%
+	{\setlength{\labelwidth}{30pt}%
+	 \setlength{\leftmargin}{35pt}%
+	 \setlength{\itemsep}{\parsep}}}%
+{ \end{list} }
+
+
+%------------------------------------------------------------------------------------------------
+% Paramétrage du langage TI pour la reconnaissance des mots clé utilisés
+% A compléter avec les fonctions du catalogue de texas.
+%------------------------------------------------------------------------------------------------
+\lstdefinelanguage{TI}{%
+       morekeywords={%
+        %%% CONTROLE.
+          If, Then, Else, For, While, Repeat, End, Pause, Lbl, Goto, IS>, DS<, Menu, prgm, Return, Stop, EffVar, GraphStyle,
+        %%% ENTREES & SORTIES
+          Input, Prompt, Disp, AffGraph, AffTable, Output, codeTouch, EffEcr, EffTable, CaptVar,
+        %%% CATALOG
+         NbrAléat,
+        %%% FONCTIONS NUMERIQUES
+          cos, sin, tan, acos, asin, atan,
+        %%% CONSTANTES
+          pi,
+      },
+      sensitive=true,
+      morecomment=[l]{\#},
+      morestring=[b]',
+    }
+
+
+%---------------------------------------------------------------------------------------- 
+% 									Environnement NSI
+%----------------------------------------------------------------------------------------
+
+\newenvironment{NSI}[2]
+{
+	\noindent
+	\setlength{\fboxsep}{0cm}\setlength{\fboxrule}{0pt}\framebox[19cm]{
+		\setlength{\fboxsep}{0.25cm}\setlength{\fboxrule}{1pt}
+		\Huge{\textbf{#1:}}
+		\hspace{0.5cm}{\huge{#2}}\hfill
+	}
+	{\newline \rule[0cm]{\linewidth}{0.05em}}
+}
+
+%---------------------------------------------------------------------------------------- 
+% 									Environnement de cours
+%----------------------------------------------------------------------------------------
+\newcounter{nbCrs}
+%\setcounter{nbCrs}{1}
+
+\newenvironment{headCrs}[1]
+{
+	\noindent
+	\setlength{\fboxsep}{0cm}\setlength{\fboxrule}{0pt}\framebox[19cm]{
+		\setlength{\fboxsep}{0.25cm}\setlength{\fboxrule}{1pt}
+		\Ovalbox{\Huge{\textbf{\thenbCrs}}}
+		\hspace{0cm plus 1fill}{\huge{\textbf{#1}}}
+	}
+	{\newline \rule[-0.3cm]{\linewidth}{0.05em}}
+	\vspace{0.25cm}
+}
+
+
+
+%-----------------------------------------------------------------------------------------------
+% 								Environnement d'Activité
+%-----------------------------------------------------------------------------------------------
+\newcounter{nbAct}
+%\setcounter{nbAct}{1}
+
+\newenvironment{headAct}[1]
+{
+	\setlength{\fboxsep}{-0.5cm}\setlength{\fboxrule}{0pt} 
+	\ifthenelse{\equal{#1}{Activité}}
+		{
+			\addtocounter{nbAct}{1}
+			\noindent
+			\framebox[19cm]{
+				\begin{Huge}
+					$\rhd$ %\hspace{\stretch{1}} 
+					\textbf{#1~\thenbAct}
+					\hspace{\stretch{1}} %$\bigcirc$
+				\end{Huge}			  
+			}
+		}
+		{
+			\noindent
+			\framebox[19cm]{
+				\begin{Huge}
+					$\bigcirc$ \hspace{\stretch{1}} 
+					\textbf{#1~\thenbAct}
+					\hspace{\stretch{1}} $\bigcirc$
+				\end{Huge}				  
+			}
+		}
+}
+{\newline \rule{\linewidth}{1pt} \medskip}
+
+%-----------------------------------------------------------------------------------------------
+% 								Environnement d'AP
+%-----------------------------------------------------------------------------------------------
+\newcounter{nbAP}
+
+\newenvironment{headAP}[1]
+{
+	\setlength{\fboxsep}{-0.5cm}\setlength{\fboxrule}{0pt} 
+	\ifthenelse{\equal{#1}{Accompagnement Personnalisé}}
+		{
+			\addtocounter{nbAP}{1}
+			\framebox[18cm]{
+				\begin{Huge}
+					$\square$ \hspace{\stretch{1}} 
+					\textbf{#1~\thenbAP}
+					\hspace{\stretch{1}} $\square$
+				\end{Huge}				  
+			}
+		}
+		{
+			\framebox[18cm]{
+				\begin{Huge}
+					$\square$ \hspace{\stretch{1}} 
+					\textbf{#1~\thenbAP}
+					\hspace{\stretch{1}} $\square$
+				\end{Huge}				  
+			}
+		}
+}
+{\newline \rule{\linewidth}{1pt}}
+
+%------------------------------------- 
+% 				Environnement Exercices
+%-------------------------------------
+\newcounter{nbEx}
+%\setcounter{nbAct}{1}
+
+\newenvironment{headEx}[1]
+{
+	\setlength{\fboxsep}{0cm}\setlength{\fboxrule}{0pt} 
+
+			\framebox[18cm]{
+				\begin{huge}\textsc{Exercices:}\end{huge}
+				\begin{LARGE}#1\end{LARGE}\hspace{\stretch{1}}
+				%\begin{huge}	\hspace{\stretch{1}} \textbf{\thenbEx}\end{huge}
+			}
+}
+{\newline \rule{\linewidth}{1pt}}
+
+%------------------------------------- 
+% 				Environnement TP Info
+%-------------------------------------
+\newcounter{nbTP}
+
+\newenvironment{headTP}[1]
+{
+	\setlength{\fboxsep}{-0.5cm}\setlength{\fboxrule}{0pt} 
+	\ifthenelse{\equal{#1}{TP}}
+		{
+			\addtocounter{nbTP}{1}
+			\framebox[18cm]{
+				\begin{Huge}
+					\textbf{#1}
+					\hspace{\stretch{1}} \textbf{\thenbTP}
+				\end{Huge}				  
+			}
+		}
+		{
+			\framebox[18cm]{
+				\begin{Huge}
+					\textbf{#1}
+					\hspace{\stretch{1}} \textbf{\thenbTP}
+				\end{Huge}				  
+			}
+		}
+}
+{\newline \rule{\linewidth}{1pt}}
+
+
+%------------------------------------- 
+% 				Environnement DNS
+%-------------------------------------
+\newcounter{nbDNS}
+%\setcounter{nbDNS}{1}
+
+\newenvironment{headDNS}[4]	%{DNS}{date}{sujet}{classe}
+{
+	\setlength{\fboxsep}{0.25cm}\setlength{\fboxrule}{0pt} 
+	\ifthenelse{\equal{#1}{DNS}}
+		{
+			\addtocounter{nbDNS}{1}
+			\noindent
+			\framebox[18.5cm]{
+				\LARGE{\DNS} \textbf{~\thenbDNS} \hspace{\stretch{1}} \large{#2}
+			}
+			\newline
+			\framebox[18.5cm]{
+					\makebox[2\width]{\small{#3}} \hspace{\stretch{1}} \makebox[5\width]{\large{#4}}
+			}
+		}
+		{
+			%\addtocounter{nbDNS}{1}			
+			\noindent
+			\framebox[18.5cm]{
+					\LARGE{ #1 } \textbf{~\thenbDNS} \hspace{\stretch{1}} \large{#2}
+			}
+			\newline
+			\framebox[18.5cm]{
+					\makebox[2\width]{\small{#3}} \hspace{\stretch{1}} \makebox[5\width]{\large{#4}}
+			}
+		}
+}
+{\newline \rule{\linewidth}{1pt}}
+
+%------------------------------------- 
+% 				Environnement DS
+%-------------------------------------
+\newcounter{nbDS}
+%\setcounter{nbDS}{1}
+
+\newenvironment{headDS}[4]	%{DS}{date}{sujet}{classe}
+{
+	\setlength{\fboxsep}{0.25cm}\setlength{\fboxrule}{0pt} 
+	\ifthenelse{\equal{#1}{DS}}
+		{
+			\addtocounter{nbDS}{1}
+			\noindent
+			\framebox[18.5cm]{
+				\LARGE{\DS} \textbf{~\thenbDS} \hspace{\stretch{1}} \large{#2}
+			}
+			\newline
+			\framebox[18.5cm]{
+				\makebox[2\width]{\small{#3}} \hspace{\stretch{1}} 	\makebox[2\width]{\large{#4}}
+			}
+		}
+		{
+			\noindent
+			\framebox[18.5cm]{
+					\Large{ #1 } \textbf{~\thenbDS} \hspace{\stretch{1}} \large{#2}
+			}
+			\newline
+			\framebox[18.5cm]{
+				\makebox[2\width]{\small{#3}} \hspace{\stretch{1}}\hfill \makebox[5\width]{\large{#4}}
+			}
+		}
+}
+{\newline \rule{\linewidth}{1pt}\bigskip}
+
+%------------------------------------- 
+% 				Environnement de TEST
+%-------------------------------------
+\newcounter{nbTEST}
+%\setcounter{nbTEST}{1}
+
+\newenvironment{headTEST}[2]	%{Test}{classe}
+{
+	\setlength{\fboxsep}{0.25cm}\setlength{\fboxrule}{0pt} 
+	\ifthenelse{\equal{#1}{TEST}}
+		{
+			\addtocounter{nbTEST}{1}
+			\noindent
+			\framebox[18.5cm]{
+					\makebox[4cm]{\LARGE{ #1 } \textbf{~\thenbTEST}} \hspace{\stretch{1}} \makebox[8cm][l]{\LARGE{Nom:}}
+			}
+			\newline
+			\framebox[18.5cm]{
+					\makebox[4cm]{\large{#2}} \hspace{\stretch{1}} \makebox[8cm][l]{\LARGE{Prénom:}}
+			}
+		}
+		{
+			\noindent
+			\framebox[18.5cm]{
+					\Large{ #1 } \textbf{~\thenbTEST} \hspace{\stretch{1}} \makebox[10cm]{Corrigé}
+			}
+			\newline
+			\framebox[18.5cm]{
+					\makebox[6cm]{\small{#2}}
+			}
+		}
+}
+{\newline \rule{\linewidth}{1pt}}
+
+%------------------------------------- 
+% 				Environnement de ACQUIS
+%-------------------------------------
+\newcounter{nbACQUIS}
+%\setcounter{nbTEST}{1}
+
+\newenvironment{headACQUIS}[2]	%{Test}{classe}
+{
+	\setlength{\fboxsep}{0.25cm}\setlength{\fboxrule}{0pt} 
+	\ifthenelse{\equal{#1}{ACQUIS}}
+		{
+			\addtocounter{nbACQUIS}{1}
+			\noindent
+			\framebox[18.5cm]{
+					\makebox[4cm]{\LARGE{ #1 } \textbf{~\thenbACQUIS}} \hspace{\stretch{1}} \makebox[8cm][l]{\LARGE{Nom:}}
+			}
+			\newline
+			\framebox[18.5cm]{
+					\makebox[4cm]{\large{#2}} \hspace{\stretch{1}} \makebox[8cm][l]{\LARGE{Prénom:}}
+			}
+		}
+		{
+			\noindent
+			\framebox[18.5cm]{
+					\Large{ #1 } \textbf{~\thenbACQUIS} \hspace{\stretch{1}} \makebox[10cm]{Corrigé}
+			}
+			\newline
+			\framebox[18.5cm]{
+					\makebox[6cm]{\small{#2}}
+			}
+		}
+}
+{\newline \rule{\linewidth}{1pt}}
+
+%------------------------------------- 
+% 				Environnement de QCM
+%-------------------------------------
+\newcounter{nbQCM}
+%\setcounter{nbQCM}{1}
+
+\newenvironment{headQCM}[2]	%{QCM}{classe}
+{
+	\setlength{\fboxsep}{0.25cm}\setlength{\fboxrule}{0pt} 
+	\ifthenelse{\equal{#1}{QCM}}
+		{
+			\addtocounter{nbQCM}{1}
+			\noindent
+			\framebox[18.5cm]{
+					\makebox[4cm]{\LARGE{ #1 } \textbf{~\thenbQCM}} \hspace{\stretch{1}} \makebox[8cm][l]{\LARGE{Nom:}}
+			}
+			\newline
+			\framebox[18.5cm]{
+					\makebox[4cm]{\large{#2}} \hspace{\stretch{1}} \makebox[8cm][l]{\LARGE{Prénom:}}
+			}
+		}
+		{
+			\noindent
+			\framebox[18.5cm]{
+					\Large{ #1 } \textbf{~\thenbQCM} \hspace{\stretch{1}} \makebox[10cm]{Corrigé}
+			}
+			\newline
+			\framebox[18.5cm]{
+					\makebox[6cm]{\small{#2}}
+			}
+		}
+}
+{\newline \rule{\linewidth}{1pt}}
+
+
+
+%------------------------------------- 
+% 				Environnement de DSSC
+%-------------------------------------
+\newcounter{nbDSSC}
+%\setcounter{nbQCM}{1}
+
+\newenvironment{headDSSC}[2]	%{DSSC}{classe}
+{
+	\setlength{\fboxsep}{0.25cm}\setlength{\fboxrule}{0pt} 
+	\ifthenelse{\equal{#1}{DS}}
+		{
+			\addtocounter{nbDSSC}{1}
+			\noindent
+			\framebox[18.5cm]{
+					\makebox[4cm]{\LARGE{ #1 } \textbf{~\thenbDSSC}} \hspace{\stretch{1}} \makebox[8cm][l]{\LARGE{Nom:}}
+			}
+			\newline
+			\framebox[18.5cm]{
+					\makebox[4cm]{\large{#2}} \hspace{\stretch{1}} \makebox[8cm][l]{\LARGE{Prénom:}}
+			}
+		}
+		{
+			\noindent
+			\framebox[18.5cm]{
+					\Large{ #1 } \textbf{~\thenbDSSC} \hspace{\stretch{1}} \makebox[10cm]{Corrigé}
+			}
+			\newline
+			\framebox[18.5cm]{
+					\makebox[6cm]{\small{#2}}
+			}
+		}
+}
+{\newline \rule{\linewidth}{1pt}}
+
+
+
+\newenvironment{cadre}[1]
+{
+\parbox[t][1.5\height]{\textwidth}{\ovalbox{~~\textbf{#1}~~}}\smallskip
+}
+
+%-------------------------------------
+% 					Table des matières
+%-------------------------------------
+
+\renewcommand{\contentsname}{Sommaire} 
+
+
+%-------------------------------------
+% 					Fin du package
+%-------------------------------------
+
+%\endinput
+
+
+\newcounter{num}
+\newcounter{rem}
+\setcounter{num}{0}
+\setcounter{rem}{0}
+\renewcommand{\arraystretch}{1.25}
+%\setlength{\tabcolsep}{0.4cm}
+\setlength{\parindent}{0.25cm}
+\setitemize[0]{font=\bfseries, label=$\bullet$ }
+\newcommand{\Frac}[2]{\displaystyle{\frac{#1}{#2}}}
+
+
+\begin{document}
+
+
+
+\begin{NSI}
+{TP}{Quart de tour d'une image}
+\end{NSI}
+
+
+L'objectif est d'écrire un programme en Python qui réalise la rotation d'une image carrée d'un quart de tour.
+
+Notre image carrée doit avoir une des dimensions qui sont des puissances de 2. Par exemple 2, 4, 8, 16, 32, ... pixel de côté.
+
+L'algorithme applique le principe de \textbf{diviser pour régner}.
+
+
+\section*{Commençons par dessiner}
+
+On se restreint à une image carrée de 4 pixel de côté pour comprendre le principe.
+
+On va compléter la figure ci-dessous et faire tourner d'un quart de tour notre image.
+
+
+\begin{center}
+\includegraphics[scale=0.8]{../img/quart_tour_image_4_pixel.png}
+\end{center}
+
+\section*{Algorithme diviser pour régner}
+
+L'algorithme pour tourner une image carrée revient à :
+
+
+\begin{enumerate}
+
+\item Diviser l'image en 4 images carrées dont les dimensions sont obtenues en divisant la dimension de l'image initiale par 2;
+
+\item Quand on arrive à une image de 1 pixel de côté, la division s'arrête;
+
+\item On reconstruit l'image, carré par carré en les décalant (permutation circulaire) comme le montre la figure ci-dessous.
+
+\begin{center}
+\includegraphics[scale=0.6]{../img/quart_tour_decalage.png}
+\end{center}
+
+\end{enumerate}
+
+Appliquer ce principe sur un pixel d'une image carrée de 32 pixel de côté.
+
+
+\begin{center}
+\includegraphics[scale=1]{../img/quart_tour_grille_32_pixel.png}
+\end{center}
+
+\newpage
+
+\section*{Code en Python}
+
+Python dispose d'un module \textsf{PIL} qui permet la manipulation d'image. Ce module permet de récupérer sous forme de tableau chaque pixel de l'image. Les coordonnées (-1) d'un pixel dans l'image correspondent aux indices de position dans le tableau. 
+
+Créer un fichier nommé \textsf{quart\_tour.py} et télécharger l'image \textsf{tux256.png} dans le même dossier.
+
+
+\begin{enumerate}
+
+\item On donne ci-dessous les instructions pour créer le tableau contenant chaque pixel de l'image.
+
+\begin{flushleft}
+\includegraphics[scale=0.8]{../img/module_pil.png}
+\end{flushleft}
+
+Ajouter ces instructions au début de votre programme. Attention au chemin du fichier image !
+
+\item Dans la console ou interpréteur Python:
+
+\begin{enumerate}
+
+\item Afficher les dimensions de l'image.
+
+\item Afficher le premier pixel de votre image. Interpréter la valeur affichée.
+
+\end{enumerate}
+
+\item Le quart de tour d'une image revient à :
+
+\begin{itemize}
+
+\item découper l'image en 4 carrés de même dimension $t$;
+
+\item décaler chaque pixel d'un carré dans un carré adjacent.
+
+\end{itemize}
+
+Soit $i$ et $j$ les indices d'un pixel de l'image positionné dans le carré 1. On remplace ce pixel par un pixel du carré 4 adjacent en effectuant un décalage égal à la dimension d'un carré.
+
+\begin{enumerate}
+
+\item Quels sont les indices du pixel du carré 4 qui va remplacer le pixel du carré 1 ? \vspace{1.5cm}
+
+\item Quelle est l'instruction Python à écrire pour effectuer le décalage du pixel du carré 4 vers le pixel du carré 1 ? \vspace{1.5cm}
+
+\item Quelles sont les instructions en Python pour décaler les autres pixel des autres carrés ?\vspace{1.5cm}
+
+\item Quelle est l'instruction Python qui décale tous les pixel de l'image dans les 4 carrés ? \vspace{2.5cm}
+\end{enumerate}
+
+
+\newpage
+\item La deuxième étape consiste à diviser l'image en 4 images carrées plus petites et à effectuer les décalages des pixel de chaque carré.
+
+Cette étape revient à effectuer 4 appels récursifs avec chaque carré de l'image.
+
+On donne un extrait du code en Python:
+
+\begin{flushleft}
+\includegraphics[scale=0.8]{../img/quart_tour_recursif.png}
+\end{flushleft}
+
+\begin{enumerate}
+
+
+\item Compléter les appels récursifs de la fonction correspondant à la division du problème
+
+\item Compléter la fonction \textsf{quart\_de\_tour} avec le code avec les décalages des pixel correspondant à la solution de chaque sous-problème.
+
+\item Exécuter votre code en ajoutant un appel à la fonction \textsf{quart\_de\_tour}.
+
+\item Ajouter à la fin de votre programme l'instruction \textsf{img.show()} pour afficher votre image et ainsi vérifier le quart de tour de celle-ci.
+
+\end{enumerate}
+
+
+
+
+\end{enumerate}
+
+
+\end{document}
