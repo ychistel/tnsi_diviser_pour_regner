@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="fr" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>TP : le tri fusion &#8212; NSI</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/custom.js"></script>
+    <script src="../_static/translations.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'content/tri_fusion';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="prev" title="Quart de tour" href="quart_de_tour.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="fr"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Passer au contenu principal</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search..."
+         aria-label="Search..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">NSI</p>
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="triomino.html">Les triominos</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quart_de_tour.html">Quart de tour</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">TP : le tri fusion</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Téléchargez cette page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/content/tri_fusion.rst" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Télécharger le fichier source"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.rst</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Imprimer au format PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Mode plein écran"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="clair/sombre" aria-label="clair/sombre" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Recherche" aria-label="Recherche" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>TP : le tri fusion</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contenu </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diviser-des-tableaux">Diviser des tableaux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fusionner-des-tableaux">Fusionner des tableaux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#le-tri-fusion">Le tri fusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complexite-du-tri-fusion">Complexité du tri fusion</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="tp-le-tri-fusion">
+<h1>TP : le tri fusion<a class="headerlink" href="#tp-le-tri-fusion" title="Lien permanent vers cette rubrique">#</a></h1>
+<p>Le <strong>tri fusion</strong> d’un tableau de nombres est une application du principe <strong>diviser pour régner</strong>.</p>
+<ul class="simple">
+<li><p>L’algorithme consiste à diviser ce tableau de nombres en 2 tableaux, puis chaque tableau en 2 nouveaux tableaux, etc.</p></li>
+<li><p>Une fois les tableaux divisés jusqu’à avoir qu’une seule valeur, on recompose les tableaux par assemblage en triant les éléments.</p></li>
+</ul>
+<p>Vous trouverez des informations sur la page wikipedia du <a class="reference external" href="https://fr.wikipedia.org/wiki/Tri_fusion">tri fusion</a>.</p>
+<section id="diviser-des-tableaux">
+<h2>Diviser des tableaux<a class="headerlink" href="#diviser-des-tableaux" title="Lien permanent vers cette rubrique">#</a></h2>
+<p>On souhaite créer un tableau de valeurs à partir d’un autre tableau plus grand. Les valeurs sélectionnées se suivent dans le grand tableau ou sont séparées par un même nombre de valeurs.</p>
+<p>Le <strong>slice</strong> est une technique en Python qui permet de sélectionner des éléments d’un tableau et se note avec les deux points.</p>
+<p>Par exemple, pour extraire les valeurs d’un tableau t, on utilise la syntaxe : <code class="docutils literal notranslate"><span class="pre">t[indice</span> <span class="pre">début:indice</span> <span class="pre">fin:écart]</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Voici trois règles utiles pour les <strong>slice</strong> des list Python:</p>
+<ul class="simple">
+<li><p>Si l’indice de début est 0, on peut ne pas l’écrire.</p></li>
+<li><p>Si l’indice de fin correspond à la dernière valeur, on peut laisser vide.</p></li>
+<li><p>Si les valeurs à sélectionner se suivent, l’écart n’est pas nécessaire.</p></li>
+</ul>
+</div>
+<p>Soit t un tableau de 8 valeurs. Créer à partir de ce tableau :</p>
+<ol class="arabic simple">
+<li><p>Un tableau sans la première et la dernière valeur;</p></li>
+<li><p>Un tableau composé de la première moitié de tableau;</p></li>
+<li><p>Un tableau composé de la seconde moitié de tableau;</p></li>
+<li><p>Un tableau avec les deux valeurs centrales;</p></li>
+<li><p>Un tableau avec les valeurs d’indices pairs;</p></li>
+<li><p>Un tableau avec les valeurs d’indices impairs;</p></li>
+</ol>
+</section>
+<section id="fusionner-des-tableaux">
+<h2>Fusionner des tableaux<a class="headerlink" href="#fusionner-des-tableaux" title="Lien permanent vers cette rubrique">#</a></h2>
+<p>La fusion de 2 tableaux peut se réaliser de plusieurs façons.</p>
+<ol class="arabic simple">
+<li><p>La concaténation est une opération consistant à assembler deux tableaux en un seul. Le signe d’addition <code class="docutils literal notranslate"><span class="pre">+</span></code> est utilisé pour la concaténation.</p>
+<ol class="loweralpha simple">
+<li><p>Concaténer les tableaux <code class="docutils literal notranslate"><span class="pre">[3]</span></code> et <code class="docutils literal notranslate"><span class="pre">[5]</span></code>.</p></li>
+<li><p>Concaténer les tableaux <code class="docutils literal notranslate"><span class="pre">[5]</span></code> et <code class="docutils literal notranslate"><span class="pre">[3]</span></code>.</p></li>
+<li><p>Concaténer les tableaux <code class="docutils literal notranslate"><span class="pre">[3,7]</span></code> et <code class="docutils literal notranslate"><span class="pre">[5,8]</span></code>.</p></li>
+<li><p>Les tableaux obtenus par concaténation ont-ils leurs valeurs triées ? Pourquoi ?</p></li>
+</ol>
+</li>
+<li><p>Il est possible de fusionner deux tableaux triés en un seul tableau trié. Pour y parvenir, il faut parcourir chaque tableau et insérer dans un nouveau tableau les valeurs en respectant l’ordre.</p>
+<ol class="loweralpha simple">
+<li><p>En réalisant des schémas, décrire la fusion des tableaux <code class="docutils literal notranslate"><span class="pre">[1,6,8]</span></code> et <code class="docutils literal notranslate"><span class="pre">[3,5]</span></code>.</p></li>
+<li><p>Écrire en Python une fonction fusion_tableaux qui prend en paramètre 2 tableaux triés et renvoie un tableau trié avec les valeurs des 2 tableaux passés en argument.</p></li>
+</ol>
+</li>
+</ol>
+</section>
+<section id="le-tri-fusion">
+<h2>Le tri fusion<a class="headerlink" href="#le-tri-fusion" title="Lien permanent vers cette rubrique">#</a></h2>
+<p>L’algorithme se décompose en 2 temps. Le premier temps consiste à <strong>diviser</strong> le tableau en tableaux vides ou à 1 valeur. Le second temps consiste à <strong>fusionner</strong> les tableaux triés jusqu’à obtenir le tableau initial trié.</p>
+<ol class="arabic">
+<li><p>Appliquer le tri fusion sur la liste <code class="docutils literal notranslate"><span class="pre">L=[7,4,9,1,3,5,8]</span></code> en donnant précisément les différentes étapes.</p></li>
+<li><p>On donne le script de la division:</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/tri_fusion.png"><img alt="image" src="../_images/tri_fusion.png" style="width: 520px;" /></a>
+</figure>
+<p>Saisir et compléter ce code dans votre script Python.</p>
+</li>
+<li><p>Écrire la fonction fusion qui effectue la fusion de 2 tableaux triés.</p></li>
+<li><p>Créer des listes aléatoires de nombres entiers puis vérifier que le tri fusion est réalisé.</p></li>
+</ol>
+</section>
+<section id="complexite-du-tri-fusion">
+<h2>Complexité du tri fusion<a class="headerlink" href="#complexite-du-tri-fusion" title="Lien permanent vers cette rubrique">#</a></h2>
+<p>On va comparer l’efficacité du tri fusion par rapport au tri par sélection et tri par insertion en mesurant les temps d’exécution de ces tris.</p>
+<p>On donne le fichier Python <code class="docutils literal notranslate"><span class="pre">mesure_tris.py</span></code> qui contient:</p>
+<ul class="simple">
+<li><p>La fonction</p></li>
+</ul>
+<ol class="loweralpha simple">
+<li><p>Reprendre le TP sur la mesure du temps d’exécution des tris par sélection et insertion.
+b. Importer la fonction <code class="docutils literal notranslate"><span class="pre">tri_fusion</span></code> puis effectuer des mesures de temps d’exécution de ce tri.
+c. Comparer la complexité des tris en comparant vos mesures.</p></li>
+</ol>
+</section>
+</section>
+
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="quart_de_tour.html"
+       title="page précédente">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">précédent</p>
+        <p class="prev-next-title">Quart de tour</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contenu
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#diviser-des-tableaux">Diviser des tableaux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fusionner-des-tableaux">Fusionner des tableaux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#le-tri-fusion">Le tri fusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complexite-du-tri-fusion">Complexité du tri fusion</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+Par Yannick Chistel
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023,Yannick Chistel.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
