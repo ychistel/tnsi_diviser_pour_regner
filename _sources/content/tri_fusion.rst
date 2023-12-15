@@ -53,7 +53,7 @@ La fusion de 2 tableaux peut se réaliser de plusieurs façons.
 #. Il est possible de fusionner deux tableaux triés en un seul tableau trié. Pour y parvenir, il faut parcourir chaque tableau et insérer dans un nouveau tableau les valeurs en respectant l’ordre.
 
    a. En réalisant des schémas, décrire la fusion des tableaux ``[1,6,8]`` et ``[3,5]``.
-   #. Écrire en Python une fonction fusion_tableaux qui prend en paramètre 2 tableaux triés et renvoie un tableau trié avec les valeurs des 2 tableaux passés en argument.
+   #. Écrire en Python une fonction ``fusion_tableaux`` qui prend en paramètre 2 tableaux triés et renvoie un tableau trié avec les valeurs des 2 tableaux passés en argument.
 
 Le tri fusion
 -------------
@@ -85,7 +85,7 @@ On donne le fichier Python ``mesure_tris.py`` qui contient :
 -  la fonction de mesure du temps d'exécution d'une fonction.
 
 .. literalinclude:: ../python/mesure_tris.py
-   
+
 a. Effectuer des mesures sur les tris par sélection et par insertion d'un tableau de 1000 nombres.
 b. Importer la fonction ``tri_fusion`` puis effectuer des mesures de temps d'exécution de ce tri.
 c. Comparer la complexité des tris en comparant vos mesures.
