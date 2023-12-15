@@ -33,7 +33,7 @@ def quart_de_tour(px,x,y,t):
         for i in range(x,x+t):
             for j in range(y,y+t):
                 px[i,j],px[i,j+t],px[i+t,j+t],px[i+t,j]=px[i+t,j],px[i,j],px[i,j+t],px[i+t,j+t]
-        
+     
 if largeur==hauteur:
     quart_de_tour(px,0,0,largeur)
 else:

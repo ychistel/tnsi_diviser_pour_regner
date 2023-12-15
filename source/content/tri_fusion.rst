@@ -78,10 +78,14 @@ Complexité du tri fusion
 
 On va comparer l’efficacité du tri fusion par rapport au tri par sélection et tri par insertion en mesurant les temps d'exécution de ces tris.
 
-On donne le fichier Python ``mesure_tris.py`` qui contient:
+On donne le fichier Python ``mesure_tris.py`` qui contient :
 
--  La fonction 
+-  la fonction ``tri_selection``;
+-  la fonction ``tri_insertion``;
+-  la fonction de mesure du temps d'exécution d'une fonction.
 
-a. Reprendre le TP sur la mesure du temps d'exécution des tris par sélection et insertion.
-   b. Importer la fonction ``tri_fusion`` puis effectuer des mesures de temps d'exécution de ce tri.
-   c. Comparer la complexité des tris en comparant vos mesures.
+.. literalinclude:: ../python/mesure_tris.py
+   
+a. Effectuer des mesures sur les tris par sélection et par insertion d'un tableau de 1000 nombres.
+b. Importer la fonction ``tri_fusion`` puis effectuer des mesures de temps d'exécution de ce tri.
+c. Comparer la complexité des tris en comparant vos mesures.

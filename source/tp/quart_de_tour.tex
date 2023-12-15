@@ -575,11 +575,16 @@ L'algorithme pour tourner une image carrée revient à :
 
 \end{enumerate}
 
-Appliquer ce principe sur un pixel d'une image carrée de 32 pixel de côté.
+Appliquons ce principe sur un pixel d'une image carrée de 16 pixel de côté.
+\begin{itemize}
+\item Choisir un pixel et le colorier en bleu;
+\item Diviser l'image en carrés en convergeant vers le pixel bleu;
+\item Recomposer l'image en décalant à chaque étape le carré contenant le pixel bleu.
+\end{itemize}
 
 
 \begin{center}
-\includegraphics[scale=1]{../img/quart_tour_grille_32_pixel.png}
+\includegraphics[scale=1]{../img/quart_tour_grille_16_pixel.png}
 \end{center}
 
 \newpage
@@ -645,7 +650,7 @@ On donne un extrait du code en Python:
 \begin{flushleft}
 \includegraphics[scale=0.8]{../img/quart_tour_recursif.png}
 \end{flushleft}
-
+\vspace{4cm}
 \begin{enumerate}
 
 
