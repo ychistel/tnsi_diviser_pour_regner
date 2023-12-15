@@ -373,14 +373,88 @@ document.write(`
 <section id="complexite-du-tri-fusion">
 <h2>Complexité du tri fusion<a class="headerlink" href="#complexite-du-tri-fusion" title="Lien permanent vers cette rubrique">#</a></h2>
 <p>On va comparer l’efficacité du tri fusion par rapport au tri par sélection et tri par insertion en mesurant les temps d’exécution de ces tris.</p>
-<p>On donne le fichier Python <code class="docutils literal notranslate"><span class="pre">mesure_tris.py</span></code> qui contient:</p>
+<p>On donne le fichier Python <code class="docutils literal notranslate"><span class="pre">mesure_tris.py</span></code> qui contient :</p>
 <ul class="simple">
-<li><p>La fonction</p></li>
+<li><p>la fonction <code class="docutils literal notranslate"><span class="pre">tri_selection</span></code>;</p></li>
+<li><p>la fonction <code class="docutils literal notranslate"><span class="pre">tri_insertion</span></code>;</p></li>
+<li><p>la fonction de mesure du temps d’exécution d’une fonction.</p></li>
 </ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<span class="kn">from</span> <span class="nn">tri_fusion</span> <span class="kn">import</span> <span class="n">fusion</span><span class="p">,</span><span class="n">tri_fusion</span>
+
+<span class="k">def</span> <span class="nf">tri_selection</span><span class="p">(</span><span class="n">tableau</span><span class="p">):</span>
+    <span class="n">i</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">tableau</span><span class="p">):</span>
+        <span class="n">k</span><span class="o">=</span><span class="n">i</span>
+        <span class="n">j</span><span class="o">=</span><span class="n">k</span>
+        <span class="k">while</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">tableau</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">tableau</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">tableau</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">j</span><span class="o">=</span><span class="n">k</span>
+            <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span>
+        <span class="n">tableau</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">tableau</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="n">j</span><span class="p">],</span><span class="n">tableau</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+        <span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">tableau</span>
+
+<span class="k">def</span> <span class="nf">tri_insertion</span><span class="p">(</span><span class="n">tableau</span><span class="p">):</span>
+    
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tableau</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">tampon</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+        <span class="k">while</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">tableau</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">tampon</span><span class="p">:</span>
+            <span class="n">tableau</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">tableau</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span>
+        
+        <span class="n">tableau</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">tampon</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">tableau</span>
+
+
+<span class="k">def</span> <span class="nf">mesure_tri</span><span class="p">(</span><span class="n">fct</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    
+    <span class="n">tps</span> <span class="o">=</span> <span class="mf">0.0</span>
+    
+    <span class="c1"># on effectue 100 mesures de temps d&#39;exécution de la fonction</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+        <span class="c1"># on crée un tableau de dimension n</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">100000</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">)]</span>
+        <span class="n">expression</span> <span class="o">=</span> <span class="n">fct</span> <span class="o">+</span> <span class="s2">&quot;(t)&quot;</span>
+        
+        <span class="c1"># relevé du temps initial</span>
+        <span class="n">t_0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        
+        <span class="c1"># on exécute la fonction de tri</span>
+        <span class="nb">eval</span><span class="p">(</span><span class="n">expression</span><span class="p">)</span>
+
+        <span class="c1"># relevé du temps final</span>
+        <span class="n">t_1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+        
+        <span class="c1"># on ajoute le temps d&#39;exécution de la fonction</span>
+        <span class="n">tps</span> <span class="o">=</span> <span class="n">tps</span> <span class="o">+</span> <span class="p">(</span><span class="n">t_1</span><span class="o">-</span><span class="n">t_0</span><span class="p">)</span>
+    
+    <span class="c1"># on renvoie le temps moyen d&#39;exécution de la fonction</span>
+    <span class="k">return</span> <span class="n">tps</span><span class="o">/</span><span class="mi">10</span>
+
+
+<span class="c1"># on définit la taille du tableau</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">3000</span>
+<span class="c1"># on mesure les temps moyens d&#39;exécution des tris</span>
+<span class="n">tps_selection</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">mesure_tri</span><span class="p">(</span><span class="s2">&quot;tri_selection&quot;</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">tps_insertion</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">mesure_tri</span><span class="p">(</span><span class="s2">&quot;tri_insertion&quot;</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">tps_fusion</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">mesure_tri</span><span class="p">(</span><span class="s2">&quot;tri_fusion&quot;</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;le temps de tri par insertion de </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> nombres est </span><span class="si">{</span><span class="n">tps_insertion</span><span class="si">}</span><span class="s2"> seconde&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;le temps de tri par sélection de </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> nombres est </span><span class="si">{</span><span class="n">tps_selection</span><span class="si">}</span><span class="s2"> seconde&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;le temps de tri fusion de </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2"> nombres est </span><span class="si">{</span><span class="n">tps_fusion</span><span class="si">}</span><span class="s2"> seconde&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
 <ol class="loweralpha simple">
-<li><p>Reprendre le TP sur la mesure du temps d’exécution des tris par sélection et insertion.
-b. Importer la fonction <code class="docutils literal notranslate"><span class="pre">tri_fusion</span></code> puis effectuer des mesures de temps d’exécution de ce tri.
-c. Comparer la complexité des tris en comparant vos mesures.</p></li>
+<li><p>Effectuer des mesures sur les tris par sélection et par insertion d’un tableau de 1000 nombres.</p></li>
+<li><p>Importer la fonction <code class="docutils literal notranslate"><span class="pre">tri_fusion</span></code> puis effectuer des mesures de temps d’exécution de ce tri.</p></li>
+<li><p>Comparer la complexité des tris en comparant vos mesures.</p></li>
 </ol>
 </section>
 </section>
