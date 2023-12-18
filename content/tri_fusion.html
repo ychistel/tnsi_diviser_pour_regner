@@ -45,6 +45,8 @@
     <script src="../_static/custom.js"></script>
     <script src="../_static/translations.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'content/tri_fusion';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
@@ -367,7 +369,7 @@ document.write(`
 <p>Saisir et compléter ce code dans votre script Python.</p>
 </li>
 <li><p>Écrire la fonction fusion qui effectue la fusion de 2 tableaux triés.</p></li>
-<li><p>Créer des listes aléatoires de nombres entiers puis vérifier que le tri fusion est réalisé.</p></li>
+<li><p>Créer des listes aléatoires de nombres entiers puis vérifier que le tri fusion est bien réalisé.</p></li>
 </ol>
 </section>
 <section id="complexite-du-tri-fusion">
@@ -441,7 +443,7 @@ document.write(`
 
 
 <span class="c1"># on définit la taille du tableau</span>
-<span class="n">n</span> <span class="o">=</span> <span class="mi">3000</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
 <span class="c1"># on mesure les temps moyens d&#39;exécution des tris</span>
 <span class="n">tps_selection</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">mesure_tri</span><span class="p">(</span><span class="s2">&quot;tri_selection&quot;</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">tps_insertion</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">mesure_tri</span><span class="p">(</span><span class="s2">&quot;tri_insertion&quot;</span><span class="p">,</span><span class="n">n</span><span class="p">),</span><span class="mi">3</span><span class="p">)</span>
@@ -456,6 +458,19 @@ document.write(`
 <li><p>Importer la fonction <code class="docutils literal notranslate"><span class="pre">tri_fusion</span></code> puis effectuer des mesures de temps d’exécution de ce tri.</p></li>
 <li><p>Comparer la complexité des tris en comparant vos mesures.</p></li>
 </ol>
+<div class="admonition-conclusion admonition">
+<p class="admonition-title">Conclusion</p>
+<ol class="arabic simple">
+<li><p>Les tris par <strong>selection</strong> et par <strong>insertion</strong> d’un tableau de dimension <code class="docutils literal notranslate"><span class="pre">n</span></code>  ont des complexités <span class="math notranslate nohighlight">\(O(n^{2})\)</span>.</p></li>
+<li><p>Le tri <strong>fusion</strong> d’un tableau de dimension <code class="docutils literal notranslate"><span class="pre">n</span></code> a une complexité <span class="math notranslate nohighlight">\(O(n \log_{2}(n))\)</span>.</p></li>
+</ol>
+<p>Par exemple, pour un tableau de 1000 nombres à trier, la complexité :</p>
+<ul class="simple">
+<li><p>du tri par selection est d’ordre <span class="math notranslate nohighlight">\(1000^{2}=1000000=10^{6}\)</span></p></li>
+<li><p>du tri fusion est d’ordre <span class="math notranslate nohighlight">\(1000 \times \log_{2}(1000) = 1000 \times 10 = 10^{4}\)</span></p></li>
+</ul>
+<p>Cela signifie que le tri fusion est jusqu’à 100 fois plus efficace (rapide) que le tri par selection.</p>
+</div>
 </section>
 </section>
 
