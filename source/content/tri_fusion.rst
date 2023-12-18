@@ -71,7 +71,7 @@ L’algorithme se décompose en 2 temps. Le premier temps consiste à **diviser*
    Saisir et compléter ce code dans votre script Python.
 
 #. Écrire la fonction fusion qui effectue la fusion de 2 tableaux triés.
-#. Créer des listes aléatoires de nombres entiers puis vérifier que le tri fusion est réalisé.
+#. Créer des listes aléatoires de nombres entiers puis vérifier que le tri fusion est bien réalisé.
 
 Complexité du tri fusion
 ------------------------
@@ -89,3 +89,15 @@ On donne le fichier Python ``mesure_tris.py`` qui contient :
 a. Effectuer des mesures sur les tris par sélection et par insertion d'un tableau de 1000 nombres.
 b. Importer la fonction ``tri_fusion`` puis effectuer des mesures de temps d'exécution de ce tri.
 c. Comparer la complexité des tris en comparant vos mesures.
+
+.. admonition:: Conclusion
+
+   #. Les tris par **selection** et par **insertion** d'un tableau de dimension ``n``  ont des complexités :math:`O(n^{2})`.
+   #. Le tri **fusion** d'un tableau de dimension ``n`` a une complexité :math:`O(n \log_{2}(n))`.
+
+   Par exemple, pour un tableau de 1000 nombres à trier, la complexité :
+
+   -  du tri par selection est d'ordre :math:`1000^{2}=1000000=10^{6}`
+   -  du tri fusion est d'ordre :math:`1000 \times \log_{2}(1000) = 1000 \times 10 = 10^{4}`
+
+   Cela signifie que le tri fusion est jusqu'à 100 fois plus efficace (rapide) que le tri par selection.

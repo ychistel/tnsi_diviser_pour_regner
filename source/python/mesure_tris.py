@@ -60,7 +60,7 @@ def mesure_tri(fct,n):
 
 
 # on définit la taille du tableau
-n = 3000
+n = 1000
 # on mesure les temps moyens d'exécution des tris
 tps_selection = round(mesure_tri("tri_selection",n),3)
 tps_insertion = round(mesure_tri("tri_insertion",n),3)
